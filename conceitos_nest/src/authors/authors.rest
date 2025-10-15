@@ -1,0 +1,35 @@
+### Messages
+
+@baseUrl = http://localhost:3000/authors
+
+### FIND ALL
+GET {{baseUrl}}
+
+
+### FIND BY ID
+GET {{baseUrl}}/1
+
+
+### CREATE
+POST {{baseUrl}}/
+Content-Type: application/json
+
+{
+  "email": "author1@example.com",
+  "password": "securepassword",
+  "name": "Author Name",
+  "bio": "Author Bio"
+}
+
+### UPDATE
+PATCH {{baseUrl}}/19
+Content-Type: application/json
+
+{
+  "name": "Author Name12",
+  "bio": "Author Bio12"
+}
+
+### DELETE
+DELETE {{baseUrl}}/1
+

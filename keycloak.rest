@@ -1,0 +1,44 @@
+### Keycloak API Client
+
+@baseUrl=http://localhost:8080
+
+### Login Admin
+POST {{baseUrl}}/realms/master/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password&client_id=admin-cli&username=admin&password=pass@
+
+### Extract Access Token
+@realm=test
+@access_token= eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJkTDN0SHhmSzZmbnFxUmhTVk8waGZMQXJQdThUMXVjM1p6OE1acXZzOE44In0.eyJleHAiOjE3NjA0OTIzODAsImlhdCI6MTc2MDQ5MjMyMCwianRpIjoiMTQ4NmZjM2ItZjc0Yi00YmYxLWI3NjMtNzk0ODVlODI2Y2NkIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9tYXN0ZXIiLCJzdWIiOiI0M2EyNDZkMi1jMTkyLTQyMmItYjRmMS1iMzk1ZGM5ZGVmMmQiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzaWQiOiIyYmNkMDg3Yy1iYmJhLTRlOGQtOGQ5Yy00N2I2MjNmNTM5ZTEiLCJhY3IiOiIxIiwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhZG1pbiJ9.NHQvbiWkzQ-zz2LWhn1Gb-ukaOWcS8GuaD5pts6fbBrdCbTk66FimAcUnuH7jRkUwnCIXYzOt7Zf54uJwnW_mHxfNtOWGqvoBk3S5HBBHvwb-cQHicAV5DsLTqriv6RHCWGatleuYdFBi9XghH4YrLbJppK1x06-iuLEKMFYjvu3xo42QDjZXqz_8HubulZ7hlkEEkBlGBdn77_1YdztnP-UmAiQnyccoDO63c6Wa6EZrtijPEgFQinZA2lvVRQ3y6w6tH3QzWA8mvUsHKSkGE6ArMflHfZcj1jub-t9hLwtWWkqhzrq-cNNH_sNRTVArbw1-ZXmTxoJmJydUuDQ7g
+
+### Get Users
+GET {{baseUrl}}/admin/realms/{{realm}}/users
+Authorization: Bearer {{access_token}}
+Accept: application/json
+
+### Create User
+POST {{baseUrl}}/admin/realms/{{realm}}/users
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "username": "newuser",
+  "enabled": true,
+  "firstName": "New",
+  "lastName": "User",
+  "email": "newuser@example.com",
+  "credentials": [
+    {
+      "type": "password",
+      "value": "password",
+      "temporary": false
+    }
+  ]
+}
+
+### Get User by ID
+@userId=replace-with-user-id
+GET {{baseUrl}}/admin/realms/{{realm}}/users/{{userId}}
+Authorization: Bearer {{access_token}}
+Accept: application/json

@@ -1,0 +1,33 @@
+### Messages
+
+@baseUrl = http://localhost:3000/messages
+
+### FIND ALL
+GET {{baseUrl}}/?page=1&limit=10
+
+
+### FIND BY ID
+GET {{baseUrl}}/1
+
+
+### CREATE
+POST {{baseUrl}}/
+Content-Type: application/json
+
+{
+  "message": "This is a new message",
+  "authorId": 3
+}
+
+### UPDATE
+PATCH {{baseUrl}}/3
+Content-Type: application/json
+
+{
+  "message": "Message updated",
+  "authorId": 3
+}
+
+### DELETE
+DELETE {{baseUrl}}/3
+
